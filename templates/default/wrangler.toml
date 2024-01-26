@@ -3,5 +3,7 @@ main = "src/index.ts"
 compatibility_date = "2024-01-08"
 workers_dev = true
 
-kv_namespaces = [{ binding = "slugs", id = "NAMESPACE_ID_FOR_SLUGS"  }]
-
+routes = [
+	{ pattern = "<%= domainName %>", custom_domain = true },
+	{ pattern = "www.<%= domainName %>", custom_domain = true }
+]

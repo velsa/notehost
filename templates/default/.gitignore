@@ -1,0 +1,15 @@
+# common
+.DS_Store
+/node_modules
+*-lock.*
+*.lock
+*.log
+
+/dist
+
+# wrangler project
+
+.dev.vars
+.wrangler/
+.vscode
+.git

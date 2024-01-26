@@ -31,10 +31,10 @@ export const SITE_CONFIG: NoteHostSiteConfig = {
 
   // The 404 (not found) page is optional
   // If you don't have one, the default 404 page will be used
-  fof: {
-    page: "NOTION_PAGE_ID",
-    slug: "404", // default
-  },
+  // fof: {
+  //   page: "NOTION_PAGE_ID",
+  //   slug: "404", // default
+  // },
 
   // Google Font name, you can choose from https://fonts.google.com
   googleFont: "Roboto",

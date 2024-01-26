@@ -1,8 +1,22 @@
 #!/usr/bin/env node
 import path from "path";
+import { version } from "../../package.json";
 
 const cmd = process.argv[2];
 const domain = process.argv[3];
+
+interface ConfigParams {
+  domainName: string;
+  siteName: string;
+  siteDescription: string;
+  siteImage: string;
+
+  packageJsonName: string;
+  wranglerWorkerName: string;
+
+  // extract from root package.json
+  notehostVersion: string;
+}
 
 const usage = () => {
   console.log("Usage: cli <command>");

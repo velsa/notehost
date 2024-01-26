@@ -16,15 +16,15 @@
   "main": "dist/index.js",
   "module": "dist/index.cjs",
   "types": "dit/index.d.ts",
+  "bin": {
+    "init": "./dist/cli/index.js"
+  },
   "scripts": {
     "prebuild": "./build-body-js-string.sh",
     "build": "pnpm run prebuild && tsup src/index.ts --format cjs,esm --dts-resolve --clean --sourcemap --out-dir dist && pnpm run build:cli",
     "build:cli": "tsup src/cli/index.ts --format cjs,esm --clean --out-dir dist/cli",
     "release": "pnpm run build && changeset publish",
     "lint": "echo Fix lint!"
-  },
-  "bin": {
-    "init": "./dist/cli/index.js"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
