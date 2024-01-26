@@ -100,7 +100,8 @@
     "noUncheckedIndexedAccess": true,
     "noEmit": true,
     "types": [
-      "@cloudflare/workers-types"
+      "@cloudflare/workers-types",
+      "@types/node"
     ],
   },
   "include": [

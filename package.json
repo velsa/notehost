@@ -1,6 +1,13 @@
 {
   "name": "notehost",
   "version": "1.0.0",
+  "description": "NoteHost is a free and powerful Notion hosting service.",
+  "repository": "https://github.com/velsa/notehost",
+  "homepage": "https://github.com/velsa/notehost",
+  "author": {
+    "name": "Vels (Itzhak Lobak)",
+    "email": "velshome@gmail.com"
+  },
   "license": "MIT",
   "type": "module",
   "main": "dist/index.js",
@@ -8,13 +15,18 @@
   "types": "dit/index.d.ts",
   "scripts": {
     "prebuild": "./build-body-js-string.sh",
-    "build": "pnpm run prebuild && tsup src/index.ts --format cjs,esm --dts-resolve --clean --sourcemap --out-dir dist",
+    "build": "pnpm run prebuild && pnpm run build:cli && tsup src/index.ts --format cjs,esm --dts-resolve --clean --sourcemap --out-dir dist",
+    "build:cli": "tsup src/cli/index.ts --format cjs,esm --clean --out-dir dist/cli",
     "release": "pnpm run build && changeset publish",
     "lint": "echo Fix lint!"
+  },
+  "bin": {
+    "init": "./dist/cli/index.js"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
     "@cloudflare/workers-types": "^4.20231218.0",
+    "@types/node": "^20.11.6",
     "tsc": "^2.0.4",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
