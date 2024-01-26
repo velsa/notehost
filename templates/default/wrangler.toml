@@ -1,0 +1,7 @@
+name = "<%= wranglerWorkerName %>"
+main = "src/index.ts"
+compatibility_date = "2024-01-08"
+workers_dev = true
+
+kv_namespaces = [{ binding = "slugs", id = "NAMESPACE_ID_FOR_SLUGS"  }]
+

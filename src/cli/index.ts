@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import path from "path";
 
 const cmd = process.argv[2];
 const domain = process.argv[3];
@@ -6,9 +7,7 @@ const domain = process.argv[3];
 const usage = () => {
   console.log("Usage: cli <command>");
   console.log("Commands:");
-  console.log(
-    "init domain_name - Initialize a new project for hosting on domain_name"
-  );
+  console.log("init domain_name - Initialize a new NoteHost worker repo");
 };
 
 if (process.argv.length < 3) {
@@ -17,7 +16,10 @@ if (process.argv.length < 3) {
 }
 
 if (cmd === "init" && domain) {
-  console.log("Initializing project for hosting on " + domain);
+  const myDir = path.join(process.argv[1], "..");
+  const localDir = process.cwd();
+  console.log(`Initializing NoteHost worker repo in: ${localDir}/${domain}`);
+  console.log(`myDir: ${myDir}`);
   process.exit(0);
 }
 

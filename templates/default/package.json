@@ -1,0 +1,19 @@
+{
+  "name": "<%= packageName %>",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "private": true,
+  "scripts": {
+    "prebuild": "./build-page-script-js-string.sh",
+    "deploy": "npm run prebuild && npx wrangler deploy",
+    "start": "npm run prebuild && npx wrangler dev",
+    "logs": "npx wrangler tail"
+  },
+  "dependencies": {
+    "notehost": "<%= noteHostVersion %>"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20231218.0",
+    "wrangler": "^3.24.0"
+  }
+}

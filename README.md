@@ -21,10 +21,10 @@
 ### Generate code for your NoteHost worker
 
 ```sh
-npx notehost init mywebsite.com
+npx notehost init yourdomain.com
 ```
 
-Obviously, replace `mywebsite.com` with your own domain name 😉
+Obviously, replace `yourdomain.com` with your own domain name 😉
 
 NoteHost will create a directory with the name of your domain.
 
@@ -51,18 +51,17 @@ npm install
 
 ### Create Cloudflare worker
 
-1. Create a new worker on Cloudflare with the name `mywebsite-com-notion-proxy`.
+1. Create a new worker on Cloudflare with the name `yourdomain-com-notion-proxy`.
 2. Leave the default example worker code, we will overwrite it anyway during deploy (see below).
-3. Add `mydomain.com` to the worker's triggers.
+3. Add `yourdomain.com` to the worker's triggers.
 
-Also add trigger for `www.mydomain.com` and define a redirect in `site-config.ts` (see below).
+Also add trigger for `www.yourdomain.com` and define a redirect in `site-config.ts` (see below).
 
 > A bit outdated but detailed description on how to add your domain to Cloudflare and create a worker is [here](https://stephenou.notion.site/stephenou/Fruition-Free-Open-Source-Toolkit-for-Building-Websites-with-Notion-771ef38657244c27b9389734a9cbff44).
-> 
+>
 > Search for "Step 1: Set up your Cloudflare account".
-> 
+>
 > If someone wishes to create an up-to-date tutorial for NoteHost, please submit a pull request 😉
-
 
 ### Configure your domain
 
@@ -71,71 +70,71 @@ Make sure that wrangler is authenticated with your Cloudflare account
 ```sh
 npx wrangler login
 ```
-  
-1. Edit `wrangler.toml` and set worker name to `mywebsite-com-notion-proxy` (same name you gave it in Cloudflare)
+
+1. Edit `wrangler.toml` and set worker name to `yourdomain-com-notion-proxy` (same name you gave it in Cloudflare)
 2. Edit `site-config.ts` and set all the necessary options: domain, slugs, subdomain redirects, etc.
 
 All settings should be self explanatory, I hope 😊
 
 ```ts
-import { NoteHostSiteConfig, googleTag } from 'notehost'
-import { PAGE_SCRIPT_JS_STRING } from './_page-script-js-string'
+import { NoteHostSiteConfig, googleTag } from "notehost";
+import { PAGE_SCRIPT_JS_STRING } from "./_page-script-js-string";
 
 // Set this to your Google Tag ID from Google Analytics
-const GOOGLE_TAG_ID = ''
+const GOOGLE_TAG_ID = "";
 
 export const SITE_CONFIG: NoteHostSiteConfig = {
-  domain: 'mywebsite.com',
+  domain: "yourdomain.com",
 
   // Metatags, optional
   // For main page link preview
-  siteName: 'My Notion Website',
-  siteDescription: 'Build your own website with Notion. This is a demo site.',
-  siteImage: 'https://imagehosting.com/images/preview.jpg',
+  siteName: "My Notion Website",
+  siteDescription: "Build your own website with Notion. This is a demo site.",
+  siteImage: "https://imagehosting.com/images/preview.jpg",
 
   // Map slugs (short page names) to Notion page IDs
   // Empty slug is your main page
   slugToPage: {
-    '': 'NOTION_PAGE_ID',
-    about: 'NOTION_PAGE_ID',
-    contact: 'NOTION_PAGE_ID',
+    "": "NOTION_PAGE_ID",
+    about: "NOTION_PAGE_ID",
+    contact: "NOTION_PAGE_ID",
   },
 
   // Subdomain redirects are optional
   // But it is recommended to have one for www
   subDomains: {
     www: {
-      redirect: 'https://mywebsite.com',
+      redirect: "https://yourdomain.com",
     },
   },
 
   // The 404 (not found) page is optional
   // If you don't have one, the default 404 page will be used
   fof: {
-    page: 'NOTION_PAGE_ID',
-    slug: '404', // default
+    page: "NOTION_PAGE_ID",
+    slug: "404", // default
   },
 
   // Google Font name, you can choose from https://fonts.google.com
-  googleFont: 'Roboto',
+  googleFont: "Roboto",
 
   // Custom JS for head and body of a Notion page
   customHeadJS: googleTag(GOOGLE_TAG_ID),
   customBodyJS: PAGE_SCRIPT_JS_STRING,
-}
+};
 ```
 
 ### What is build-page-script-js-string.sh?
 
-The file `src/page-script.js` contains an example of a page script that you can run on your Notion pages. 
-The example script removes tooltips from images and hides optional properties in database cards. 
+The file `src/page-script.js` contains an example of a page script that you can run on your Notion pages.
+The example script removes tooltips from images and hides optional properties in database cards.
 
 🔥 This script is run in the web browser! 🔥
 
-You can use `document`, `window` and all the functionality of a web browser to control the contents and behavior of your Notion pages. 
+You can use `document`, `window` and all the functionality of a web browser to control the contents and behavior of your Notion pages.
 Also, because this is a JS file, you can edit it in your code editor with syntax highlighting and intellisense!
 
-In order to add this script to a Notion page, NoteHost needs to convert the contents of this file into a string. 
+In order to add this script to a Notion page, NoteHost needs to convert the contents of this file into a string.
 Therefore the script `build-page-script-js-string.sh` is run every time you run `npm run deploy`.
 
 So just add your JS magic to `page-script.js`, run deploy and everything will happen automagically 😎
@@ -148,7 +147,7 @@ npm run deploy
 
 🎉 Enjoy your Notion website on your own domain! 🎉
 
-*IMPORTANT*: You need to run deploy every time you update your `page-script.js` or `site-config.ts`.
+_IMPORTANT_: You need to run deploy every time you update your `page-script.js` or `site-config.ts`.
 
 ### Logs
 
