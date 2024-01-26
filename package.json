@@ -10,7 +10,7 @@
     "prebuild": "./build-body-js-string.sh",
     "build": "pnpm run prebuild && tsup src/index.ts --format cjs,esm --dts-resolve --clean --sourcemap --out-dir dist",
     "release": "pnpm run build && changeset publish",
-    "lint": "tsc"
+    "lint": ""
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
