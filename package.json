@@ -9,6 +9,7 @@
   "scripts": {
     "prebuild": "./build-body-js-string.sh",
     "build": "npm run prebuild && tsup src/index.ts --format cjs,esm --dts-resolve --clean --sourcemap --out-dir dist",
+    "release": "npm run build && changeset publish",
     "lint": "npx tsc"
   },
   "devDependencies": {
