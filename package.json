@@ -9,6 +9,7 @@
     "email": "velshome@gmail.com"
   },
   "license": "MIT",
+  "access": "public",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.cjs",
