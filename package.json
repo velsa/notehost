@@ -8,9 +8,9 @@
   "types": "dit/index.d.ts",
   "scripts": {
     "prebuild": "./build-body-js-string.sh",
-    "build": "npm run prebuild && tsup src/index.ts --format cjs,esm --dts-resolve --clean --sourcemap --out-dir dist",
-    "release": "npm run build && changeset publish",
-    "lint": "npx tsc"
+    "build": "pnpm run prebuild && tsup src/index.ts --format cjs,esm --dts-resolve --clean --sourcemap --out-dir dist",
+    "release": "pnpm run build && changeset publish",
+    "lint": "tsc"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
