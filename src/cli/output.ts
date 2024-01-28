@@ -31,8 +31,11 @@ export async function copyFilesToSDK({
         const templateFile = fs.readFileSync(filePath, "utf8");
         const renderedFile = ejs.render(templateFile, parserConfig);
         const sdkFilePath = path.join(sdkDir, file);
+        const fileExt = path.extname(sdkFilePath);
 
-        fs.writeFileSync(sdkFilePath, renderedFile);
+        fs.writeFileSync(sdkFilePath, renderedFile, {
+          mode: fileExt === ".sh" ? 0o755 : 0o644,
+        });
       } catch (e) {
         console.error("Error generating SDK file: ", filePath);
         console.error(e);
