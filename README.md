@@ -20,15 +20,15 @@
 
 ## How to use:
 
-### Generate code for your NoteHost worker
+### Generate your NoteHost worker
 
 ---
 
 ```sh
-npx notehost init
+npx notehost init <domain>
 ```
 
-Follow the prompts and enter your domain name and all the requested information. You can change these settings later via the configuration file.
+Follow the prompts to confirm your domain name and enter the requested information. You can change these settings later via the configuration file.
 
 NoteHost will create a directory with the name of your domain. In this directory you will see the following files:
 
@@ -57,9 +57,9 @@ npm install
 
 ---
 
-1. Add your domain to Cloudflare. Make sure that DNS doesn't have any `A` records for your domain and no `CNAME` alias for `www`
-2. Create a new worker on Cloudflare with the name `yourdomain-com-notion-proxy`
-3. Leave the default example worker code, we will overwrite it anyway during deploy (see below)
+1. Add your domain to Cloudflare. Make sure that DNS doesn't have `A` records for your domain and no `CNAME` alias for `www`
+2. Create a new worker on Cloudflare and give it a meaningful name, e.g. `yourdomain-com-notion-proxy`
+3. Keep the default example worker code, we will overwrite it anyway during deploy (see below)
 
 > A bit outdated but detailed description on how to add your domain to Cloudflare and create a worker is [here](https://stephenou.notion.site/stephenou/Fruition-Free-Open-Source-Toolkit-for-Building-Websites-with-Notion-771ef38657244c27b9389734a9cbff44).
 >
@@ -82,7 +82,7 @@ npx wrangler login
 1. Edit `wrangler.toml` and make sure that the `name` field matches your worker name in Cloudflare
 2. Edit `site-config.ts` and set all the necessary options: domain, metadata, slugs, subdomain redirects, etc. All settings should be self explanatory, I hope 😊
 
-```ts file=src/site-config.ts
+```ts filename="src/site-config.ts"
 import { NoteHostSiteConfig, googleTag } from "notehost";
 import { PAGE_SCRIPT_JS_STRING } from "./_page-script-js-string";
 

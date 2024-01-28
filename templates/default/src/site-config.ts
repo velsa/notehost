@@ -5,13 +5,13 @@ import { PAGE_SCRIPT_JS_STRING } from "./_page-script-js-string";
 const GOOGLE_TAG_ID = "";
 
 export const SITE_CONFIG: NoteHostSiteConfig = {
-  domain: "<%= domainName>",
+  domain: "<%= domainName %>",
 
   // Metatags, optional
   // For main page link preview
-  siteName: "<%= siteName>",
-  siteDescription: "<%= siteDescription>",
-  siteImage: "<%= siteImage>",
+  siteName: "<%= siteName %>",
+  siteDescription: "<%= siteDescription %>",
+  siteImage: "<%= siteImage %>",
 
   // Map slugs (short page names) to Notion page IDs
   // Empty slug is your main page
@@ -25,7 +25,7 @@ export const SITE_CONFIG: NoteHostSiteConfig = {
   // But it is recommended to have one for www
   subDomains: {
     www: {
-      redirect: "https://<%= domainName>",
+      redirect: "https://<%= domainName %>",
     },
   },
 

@@ -4,6 +4,12 @@
   "description": "NoteHost is a free and powerful Notion hosting service.",
   "repository": "https://github.com/velsa/notehost",
   "homepage": "https://github.com/velsa/notehost",
+  "keywords": [
+    "Notion",
+    "Cloudflare",
+    "Workers",
+    "Hosting"
+  ],
   "author": {
     "name": "Vels (Itzhak Lobak)",
     "email": "velshome@gmail.com"
@@ -20,13 +26,26 @@
     "init": "./dist/cli/index.js"
   },
   "scripts": {
-    "prebuild": "./build-body-js-string.sh",
-    "build": "pnpm run prebuild && tsup src/index.ts --format cjs,esm --dts-resolve --clean --sourcemap --out-dir dist && pnpm run build:cli",
+    "dev:cli": "npx tsx --inspect src/cli/index.ts init test.com",
+    "build": "tsup src/index.ts --format cjs,esm --dts-resolve --clean --sourcemap --out-dir dist && pnpm run build:cli",
     "build:cli": "tsup src/cli/index.ts --format cjs,esm --clean --out-dir dist/cli",
-    "release": "pnpm run build && changeset publish",
+    "release:prep": "npx changeset",
+    "release:do": "pnpm run build && changeset publish",
     "lint": "echo Fix lint!"
   },
+  "dependencies": {
+    "@inquirer/prompts": "^3.3.2",
+    "change-case-all": "^2.1.0",
+    "commander": "^11.1.0",
+    "ejs": "^3.1.9",
+    "is-valid-domain": "^0.1.6"
+  },
   "devDependencies": {
+    "prettier": "3.2.2",
+    "@stylistic/eslint-plugin": "^1.5.4",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "eslint-plugin-import": "^2.29.1",
     "@changesets/cli": "^2.27.1",
     "@cloudflare/workers-types": "^4.20231218.0",
     "@types/node": "^20.11.6",
