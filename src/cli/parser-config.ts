@@ -10,16 +10,16 @@ export interface ParserConfig extends SiteConfig {
 }
 
 export async function getParserConfig(
-  domainName: string | undefined,
-  options?: any
+  domainName: string | undefined
 ): Promise<ParserConfig> {
-  const { siteName, siteDescription, siteImage } =
+  const { mainPageId, siteName, siteDescription, siteImage } =
     await getSiteConfigFromUser(domainName);
 
   const kebabDomain = changeCase.kebabCase(domainName);
 
   return {
     domainName,
+    mainPageId,
     siteName,
     siteDescription,
     siteImage,

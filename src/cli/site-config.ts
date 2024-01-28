@@ -3,7 +3,7 @@ import { validDomainName } from "./validators";
 
 export interface SiteConfig {
   domainName: string;
-
+  mainPageId: string;
   siteName: string;
   siteDescription: string;
   siteImage: string;
@@ -30,12 +30,15 @@ export async function getSiteConfigFromUser(
       "\nYou can skip those fields now (press Enter) and fill them later via the config file.\n"
   );
 
-  siteConfig.siteName = await input({ message: "Enter your site name:" });
+  siteConfig.mainPageId = await input({
+    message: "ID of your Notion Page:",
+  });
+  siteConfig.siteName = await input({ message: "Your site name:" });
   siteConfig.siteDescription = await input({
-    message: "Enter your site description:",
+    message: "Your site description:",
   });
   siteConfig.siteImage = await input({
-    message: "Enter link preview image URL:",
+    message: "Link preview image URL:",
   });
 
   return siteConfig;

@@ -1,4 +1,5 @@
 import { confirm, select } from "@inquirer/prompts";
+import chalk from "chalk";
 import fs from "fs";
 import path from "path";
 import { copyFilesToSDK } from "./output";
@@ -11,7 +12,7 @@ export async function initRepo(domain, options) {
       ? path.join(process.argv[1], "../../../..", "notehost")
       : path.join(process.argv[1], "../..", "notehost");
 
-  const parserConfig = await getParserConfig(domain, options);
+  const parserConfig = await getParserConfig(domain);
 
   const templates = fs.readdirSync(path.join(originDir, "templates"));
   const template =
@@ -34,9 +35,13 @@ export async function initRepo(domain, options) {
   });
 
   console.log(`\n🎉 Done! Your worker is in`, sdkDir);
-  console.log("\nGo into this directory and run `npm install`");
-  console.log("Edit `src/site-config.ts` to setup your website.");
-  console.log("And finally run `npm run deploy` to publish your website.");
+  console.log(`\nGo into this directory and run ${chalk.bold("npm install")}`);
+  console.log(
+    `Edit ${chalk.bold("src/site-config.ts")} to setup your website.`
+  );
+  console.log(
+    `And finally run ${chalk.bold("npm run deploy")} to publish your website.`
+  );
 
   process.exit(0);
 }

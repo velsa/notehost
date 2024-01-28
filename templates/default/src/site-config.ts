@@ -16,7 +16,7 @@ export const SITE_CONFIG: NoteHostSiteConfig = {
   // Map slugs (short page names) to Notion page IDs
   // Empty slug is your main page
   slugToPage: {
-    "": "NOTION_PAGE_ID",
+    "": "<%= mainPageId %>",
     about: "NOTION_PAGE_ID",
     contact: "NOTION_PAGE_ID",
   },
