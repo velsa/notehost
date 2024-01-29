@@ -132,6 +132,20 @@ export const SITE_CONFIG: NoteHostSiteConfig = {
 
 <br/>
 
+### Deploy your website
+
+---
+
+```sh
+npm run deploy
+```
+
+🎉 Enjoy your Notion website on your own domain! 🎉
+
+_IMPORTANT_: You need to run deploy every time you update `page-script.js` or `site-config.ts`.
+
+<br/>
+
 ### What is build-page-script-js-string.sh?
 
 ---
@@ -147,20 +161,6 @@ Also, because this is a JS file, you can edit it in your code editor with syntax
 To incorporate this script into a Notion page, NoteHost must transform the file's contents into a string. Consequently, the `build-page-script-js-string.sh` script is executed whenever you run `npm run deploy`.
 
 So just add your JS magic to `page-script.js`, run deploy and everything else will happen automagically 😎
-
-<br/>
-
-### Deploy your website
-
----
-
-```sh
-npm run deploy
-```
-
-🎉 Enjoy your Notion website on your own domain! 🎉
-
-_IMPORTANT_: You need to run deploy every time you update `page-script.js` or `site-config.ts`.
 
 <br/>
 

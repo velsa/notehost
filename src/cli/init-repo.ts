@@ -40,6 +40,9 @@ export async function initRepo(domain, options) {
     `Edit ${chalk.bold("src/site-config.ts")} to setup your website.`
   );
   console.log(
+    `Review ${chalk.bold("wrangler.toml")} and make sure your worker name is correct.`
+  );
+  console.log(
     `And finally run ${chalk.bold("npm run deploy")} to publish your website.`
   );
 
