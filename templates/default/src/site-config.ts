@@ -17,8 +17,10 @@ export const SITE_CONFIG: NoteHostSiteConfig = {
   // Empty slug is your main page
   slugToPage: {
     "": "<%= mainPageId %>",
-    about: "NOTION_PAGE_ID",
     contact: "NOTION_PAGE_ID",
+    about: "NOTION_PAGE_ID",
+    // Hint: you can use '/' in slug name to create subpages
+    "about/people": "NOTION_PAGE_ID",
   },
 
   // Subdomain redirects are optional

@@ -29,8 +29,7 @@
     "dev:cli": "npx tsx --inspect src/cli/index.ts init test.com",
     "build": "tsup src/index.ts --format cjs,esm --dts-resolve --clean --sourcemap --out-dir dist && pnpm run build:cli",
     "build:cli": "tsup src/cli/index.ts --format cjs,esm --clean --out-dir dist/cli",
-    "release:prep": "npx changeset",
-    "release:do": "pnpm run build && changeset publish",
+    "release": "pnpm run build && changeset publish",
     "lint": "echo Fix lint!"
   },
   "dependencies": {

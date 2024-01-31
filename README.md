@@ -20,9 +20,27 @@
 
 ## How to use:
 
+### Setup your Cloudflare account
+
+---
+
+1. Add your domain to Cloudflare. Make sure that DNS doesn't have `A` records for your domain and no `CNAME` alias for `www`
+2. Create a new worker on Cloudflare and give it a meaningful name, e.g. `yourdomain-com-notion-proxy`
+3. Keep the default example worker code, we will overwrite it anyway during deploy (see below)
+
+> A bit outdated but detailed description on how to add your domain to Cloudflare and create a worker is [here](https://stephenou.notion.site/stephenou/Fruition-Free-Open-Source-Toolkit-for-Building-Websites-with-Notion-771ef38657244c27b9389734a9cbff44).
+>
+> Search for "Step 1: Set up your Cloudflare account".
+>
+> If someone wishes to create an up-to-date tutorial for NoteHost, please submit a pull request 😉
+
+<br/>
+
 ### Generate your NoteHost worker
 
 ---
+
+Go into your working directory and run:
 
 ```sh
 npx notehost init <domain>
@@ -50,22 +68,6 @@ Go into this directory and run
 ```sh
 npm install
 ```
-
-<br/>
-
-### Setup your Cloudflare account
-
----
-
-1. Add your domain to Cloudflare. Make sure that DNS doesn't have `A` records for your domain and no `CNAME` alias for `www`
-2. Create a new worker on Cloudflare and give it a meaningful name, e.g. `yourdomain-com-notion-proxy`
-3. Keep the default example worker code, we will overwrite it anyway during deploy (see below)
-
-> A bit outdated but detailed description on how to add your domain to Cloudflare and create a worker is [here](https://stephenou.notion.site/stephenou/Fruition-Free-Open-Source-Toolkit-for-Building-Websites-with-Notion-771ef38657244c27b9389734a9cbff44).
->
-> Search for "Step 1: Set up your Cloudflare account".
->
-> If someone wishes to create an up-to-date tutorial for NoteHost, please submit a pull request 😉
 
 <br/>
 
@@ -104,6 +106,8 @@ export const SITE_CONFIG: NoteHostSiteConfig = {
     "": "NOTION_PAGE_ID",
     about: "NOTION_PAGE_ID",
     contact: "NOTION_PAGE_ID",
+    // Hint: you can use '/' in slug name to create subpages
+    "about/people": "NOTION_PAGE_ID",
   },
 
   // Subdomain redirects are optional
