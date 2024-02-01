@@ -147,7 +147,8 @@ npm run deploy
 
 🎉 Enjoy your Notion website on your own domain! 🎉
 
-_IMPORTANT_: You need to run deploy every time you update `page-script.js` or `site-config.ts`.
+> [!IMPORTANT] 
+> You need to run deploy every time you update `page-script.js` or `site-config.ts`.
 
 <br/>
 
