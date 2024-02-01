@@ -13,7 +13,7 @@
 - Page slugs
 - Dark mode toggle
 - Custom JS for head and body
-- Custom fonts (using [Goole Fonts](https://fonts.google.com/))
+- Custom fonts (using [Google Fonts](https://fonts.google.com/))
 - Subdomain redirect (e.g. www)
 
 <br/>
