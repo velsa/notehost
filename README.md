@@ -13,7 +13,7 @@
 - Page slugs
 - Dark mode toggle
 - Custom JS for head and body
-- Custom fonts (using [Goole Fonts](https://fonts.google.com/))
+- Custom fonts (using [Google Fonts](https://fonts.google.com/))
 - Subdomain redirect (e.g. www)
 
 <br/>
@@ -28,6 +28,7 @@
 2. Create a new worker on Cloudflare and give it a meaningful name, e.g. `yourdomain-com-notion-proxy`
 3. Keep the default example worker code, we will overwrite it anyway during deploy (see below)
 
+> [!TIP]
 > A bit outdated but detailed description on how to add your domain to Cloudflare and create a worker is [here](https://stephenou.notion.site/stephenou/Fruition-Free-Open-Source-Toolkit-for-Building-Websites-with-Notion-771ef38657244c27b9389734a9cbff44).
 >
 > Search for "Step 1: Set up your Cloudflare account".
@@ -146,7 +147,8 @@ npm run deploy
 
 🎉 Enjoy your Notion website on your own domain! 🎉
 
-_IMPORTANT_: You need to run deploy every time you update `page-script.js` or `site-config.ts`.
+> [!IMPORTANT] 
+> You need to run deploy every time you update `page-script.js` or `site-config.ts`.
 
 <br/>
 
