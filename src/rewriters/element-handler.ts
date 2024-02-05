@@ -21,7 +21,7 @@ export class ElementHandler {
   }
 
   element(element: Element) {
-    console.log(`Incoming element: <${element.tagName}>${element.getAttribute('content')}</${element.tagName}>`)
+    // console.log(`Incoming element: <${element.tagName}>${element.getAttribute('content')}</${element.tagName}>`)
 
     for (const rule of this.handleRules) {
       const attribute = element.getAttribute(rule.attribute) ?? ''
