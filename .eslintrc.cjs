@@ -52,11 +52,31 @@ module.exports = {
       {
         blankLine: 'always',
         prev: '*',
-        next: ['block', 'block-like', 'cjs-export', 'class', 'const', 'export', 'import', 'let', 'var'],
+        next: [
+          'block',
+          'block-like',
+          'cjs-export',
+          'class',
+          'const',
+          'export',
+          'import',
+          'let',
+          'var',
+        ],
       },
       {
         blankLine: 'always',
-        prev: ['block', 'block-like', 'cjs-export', 'class', 'const', 'export', 'import', 'let', 'var'],
+        prev: [
+          'block',
+          'block-like',
+          'cjs-export',
+          'class',
+          'const',
+          'export',
+          'import',
+          'let',
+          'var',
+        ],
         next: '*',
       },
       {
@@ -64,8 +84,12 @@ module.exports = {
         prev: ['const', 'let', 'var'],
         next: ['const', 'let', 'var'],
       },
-      { blankLine: 'any', prev: ['export', 'import'], next: ['export', 'import'] },
+      {
+        blankLine: 'any',
+        prev: ['export', 'import'],
+        next: ['export', 'import'],
+      },
       { blankLine: 'always', prev: '*', next: 'return' },
     ],
   },
-}
+};
