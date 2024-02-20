@@ -1,4 +1,4 @@
-import isValidDomain from "is-valid-domain";
+import isValidDomain from 'is-valid-domain'
 
 export function validDomainName(domain: string) {
   return (
@@ -8,5 +8,5 @@ export function validDomainName(domain: string) {
       subdomain: false,
       wildcard: false,
     })
-  );
+  )
 }

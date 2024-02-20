@@ -15,7 +15,7 @@ export function initializeReverseProxy(siteConfigUser: NoteHostSiteConfig) {
     slug: siteConfig.fof?.slug || '404',
   }
 
-  if (siteConfig.fof.page?.length && siteConfig.fof.slug?.length) {
+  if (siteConfig.fof.page?.length) {
     siteConfig.slugToPage[siteConfig.fof.slug] = siteConfig.fof.page
   }
 

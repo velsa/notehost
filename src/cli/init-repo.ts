@@ -1,64 +1,58 @@
-import { confirm, select } from '@inquirer/prompts';
-import chalk from 'chalk';
-import fs from 'fs';
-import path from 'path';
-import { copyFilesToSDK } from './copy-files';
-import { getParserConfig } from './parser-config';
+import { confirm, select } from '@inquirer/prompts'
+import chalk from 'chalk'
+import fs from 'fs'
+import path from 'path'
+import { copyFilesToSDK } from './copy-files'
+import { getParserConfig } from './parser-config'
 
 export async function initRepo(domain) {
-  const sdkDir = path.join(process.cwd(), domain);
-  const originDir = buildOriginDir(process.argv[1]);
-  const parserConfig = await getParserConfig(domain);
-  const templates = fs.readdirSync(path.join(originDir, 'templates'));
+  const sdkDir = path.join(process.cwd(), domain)
+  const originDir = buildOriginDir(process.argv[1])
+  const parserConfig = await getParserConfig(domain)
+  const templates = fs.readdirSync(path.join(originDir, 'templates'))
   const template =
     templates.length > 1
       ? await select({
           message: 'Generate from template:',
           choices: templates.map((t) => ({ name: t, value: t })),
         })
-      : templates[0];
+      : templates[0]
 
-  console.log(`\n🎬 Ready to generate NoteHost worker in: ${sdkDir}`);
-  await confirm({ message: 'Continue?', default: true });
+  console.log(`\n🎬 Ready to generate NoteHost worker in: ${sdkDir}`)
+  await confirm({ message: 'Continue?', default: true })
 
-  console.log('Generating...');
+  console.log('Generating...')
 
   copyFilesToSDK({
     parserConfig,
     originDir: path.join(originDir, 'templates', template),
     sdkDir,
-  });
+  })
 
-  console.log(`\n🎉 Done! Your worker is in`, sdkDir);
-  console.log(`\nGo into this directory and run ${chalk.bold('npm install')}`);
-  console.log(
-    `Edit ${chalk.bold('src/site-config.ts')} to setup your website.`,
-  );
-  console.log(
-    `Review ${chalk.bold('wrangler.toml')} and make sure your worker name is correct.`,
-  );
-  console.log(
-    `And finally run ${chalk.bold('npm run deploy')} to publish your website.`,
-  );
+  console.log(`\n🎉 Done! Your worker is in`, sdkDir)
+  console.log(`\nGo into this directory and run ${chalk.bold('npm install')}`)
+  console.log(`Edit ${chalk.bold('src/site-config.ts')} to setup your website.`)
+  console.log(`Review ${chalk.bold('wrangler.toml')} and make sure your worker name is correct.`)
+  console.log(`And finally run ${chalk.bold('npm run deploy')} to publish your website.`)
 
-  process.exit(0);
+  process.exit(0)
 }
 
 function buildOriginDir(appPath: string) {
-  const runDir = appPath.match(/^(.*)\/[^/]+$/)[1];
+  const runDir = appPath.match(/^(.*)\/[^/]+$/)[1]
 
   // running locally
   if (process.env.NOTEHOST_CLI_DEBUG) {
-    return path.join(runDir, '../..');
+    return path.join(runDir, '../..')
   }
 
-  const parts = runDir.split('/');
+  const parts = runDir.split('/')
 
   if (parts[parts.length - 2] === 'notehost') {
     // pnpx
-    return path.join(runDir, '..');
+    return path.join(runDir, '..')
   } else {
     // npx
-    return path.join(runDir, '../notehost');
+    return path.join(runDir, '../notehost')
   }
 }
