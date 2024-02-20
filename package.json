@@ -1,6 +1,6 @@
 {
   "name": "notehost",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "description": "NoteHost is a free and powerful Notion hosting service.",
   "repository": "https://github.com/velsa/notehost",
   "homepage": "https://github.com/velsa/notehost",
@@ -21,7 +21,7 @@
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.cjs",
-  "types": "dit/index.d.ts",
+  "types": "dist/index.d.ts",
   "bin": {
     "init": "./dist/cli/index.js"
   },

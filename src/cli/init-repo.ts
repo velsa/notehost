@@ -5,15 +5,10 @@ import path from "path";
 import { copyFilesToSDK } from "./output";
 import { getParserConfig } from "./parser-config";
 
-export async function initRepo(domain, options) {
+export async function initRepo(domain) {
   const sdkDir = path.join(process.cwd(), domain);
-  const originDir =
-    process.env.NODE_ENV === "development"
-      ? path.join(process.argv[1], "../../../..", "notehost")
-      : path.join(process.argv[1], "../..", "notehost");
-
+  const originDir = buildOriginDir(process.argv[1]);
   const parserConfig = await getParserConfig(domain);
-
   const templates = fs.readdirSync(path.join(originDir, "templates"));
   const template =
     templates.length > 1
@@ -47,4 +42,23 @@ export async function initRepo(domain, options) {
   );
 
   process.exit(0);
+}
+
+function buildOriginDir(appPath: string) {
+  const runDir = appPath.match(/^(.*)\/[^/]+$/)[1];
+
+  // running locally
+  if (process.env.NOTION_TS_CLIENT_DEBUG) {
+    return path.join(runDir, "../src");
+  }
+
+  const parts = runDir.split("/");
+
+  if (parts[parts.length - 2] === "notion-ts-client") {
+    // pnpx
+    return path.join(runDir, "../src");
+  } else {
+    // npx
+    return path.join(runDir, "../notion-ts-client/src");
+  }
 }
