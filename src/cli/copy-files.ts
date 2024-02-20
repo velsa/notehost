@@ -16,8 +16,6 @@ export async function copyFilesToSDK({
 }: CopyFilesToSDKParams) {
   const files = fs.readdirSync(originDir);
 
-  console.log(files);
-
   fs.mkdirSync(sdkDir, { recursive: true });
 
   files.forEach((file) => {
