@@ -49,16 +49,16 @@ function buildOriginDir(appPath: string) {
 
   // running locally
   if (process.env.NOTION_TS_CLIENT_DEBUG) {
-    return path.join(runDir, '../src');
+    return path.join(runDir, '..');
   }
 
   const parts = runDir.split('/');
 
   if (parts[parts.length - 2] === 'notehost') {
     // pnpx
-    return path.join(runDir, '../src');
+    return path.join(runDir, '..');
   } else {
     // npx
-    return path.join(runDir, '../notehost/src');
+    return path.join(runDir, '../notehost');
   }
 }
