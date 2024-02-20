@@ -2,7 +2,7 @@ import { confirm, select } from '@inquirer/prompts';
 import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
-import { copyFilesToSDK } from './output';
+import { copyFilesToSDK } from './copy-files';
 import { getParserConfig } from './parser-config';
 
 export async function initRepo(domain) {
@@ -48,8 +48,8 @@ function buildOriginDir(appPath: string) {
   const runDir = appPath.match(/^(.*)\/[^/]+$/)[1];
 
   // running locally
-  if (process.env.NOTION_TS_CLIENT_DEBUG) {
-    return path.join(runDir, '..');
+  if (process.env.NOTEHOST_CLI_DEBUG) {
+    return path.join(runDir, '../..');
   }
 
   const parts = runDir.split('/');

@@ -1,7 +1,7 @@
-import * as ejs from "ejs";
-import fs from "fs";
-import path from "path";
-import { ParserConfig } from "./parser-config";
+import * as ejs from 'ejs';
+import fs from 'fs';
+import path from 'path';
+import { ParserConfig } from './parser-config';
 
 interface CopyFilesToSDKParams {
   parserConfig: ParserConfig;
@@ -15,6 +15,9 @@ export async function copyFilesToSDK({
   sdkDir,
 }: CopyFilesToSDKParams) {
   const files = fs.readdirSync(originDir);
+
+  console.log(files);
+
   fs.mkdirSync(sdkDir, { recursive: true });
 
   files.forEach((file) => {
@@ -28,16 +31,16 @@ export async function copyFilesToSDK({
       });
     } else {
       try {
-        const templateFile = fs.readFileSync(filePath, "utf8");
+        const templateFile = fs.readFileSync(filePath, 'utf8');
         const renderedFile = ejs.render(templateFile, parserConfig);
         const sdkFilePath = path.join(sdkDir, file);
         const fileExt = path.extname(sdkFilePath);
 
         fs.writeFileSync(sdkFilePath, renderedFile, {
-          mode: fileExt === ".sh" ? 0o755 : 0o644,
+          mode: fileExt === '.sh' ? 0o755 : 0o644,
         });
       } catch (e) {
-        console.error("Error generating SDK file: ", filePath);
+        console.error('Error generating SDK file: ', filePath);
         console.error(e);
         process.exit(1);
       }
