@@ -20,6 +20,7 @@ export class BodyRewriter {
       const PAGE_TO_SLUG = ${JSON.stringify(pageToSlug)};
       const slugs = ${JSON.stringify(slugs)};
       const pages = ${JSON.stringify(pages)};
+      const notionDomain = '${this.siteConfig.notionDomain ? this.siteConfig.notionDomain : 'www.notion.so'}';
       ${BODY_JS_STRING}
       </script>
       ${customBodyJS ?? ''}

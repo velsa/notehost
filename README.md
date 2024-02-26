@@ -86,53 +86,60 @@ npx wrangler login
 2. Edit `site-config.ts` and set all the necessary options: domain, metadata, slugs, subdomain redirects, etc. All settings should be self explanatory, I hope 😊
 
 ```ts filename="src/site-config.ts"
-import { NoteHostSiteConfig, googleTag } from "notehost";
-import { PAGE_SCRIPT_JS_STRING } from "./_page-script-js-string";
+import { NoteHostSiteConfig, googleTag } from 'notehost'
+import { PAGE_SCRIPT_JS_STRING } from './_page-script-js-string'
 
 // Set this to your Google Tag ID from Google Analytics
-const GOOGLE_TAG_ID = "";
+const GOOGLE_TAG_ID = ''
 
 export const SITE_CONFIG: NoteHostSiteConfig = {
-  domain: "yourdomain.com",
+  domain: 'yourdomain.com',
 
   // Metatags, optional
   // For main page link preview
-  siteName: "My Notion Website",
-  siteDescription: "Build your own website with Notion. This is a demo site.",
-  siteImage: "https://imagehosting.com/images/preview.jpg",
+  siteName: 'My Notion Website',
+  siteDescription: 'Build your own website with Notion. This is a demo site.',
+  siteImage: 'https://imagehosting.com/images/preview.jpg',
+
+  // URL to custom favicon.ico
+  siteIcon: string,
+
+  // Additional safety: avoid serving extraneous Notion content from your website
+  // Use the value from your Notion settings => Workspace => Settings => Domain
+  notionDomain: string,
 
   // Map slugs (short page names) to Notion page IDs
   // Empty slug is your main page
   slugToPage: {
-    "": "NOTION_PAGE_ID",
-    about: "NOTION_PAGE_ID",
-    contact: "NOTION_PAGE_ID",
+    '': 'NOTION_PAGE_ID',
+    about: 'NOTION_PAGE_ID',
+    contact: 'NOTION_PAGE_ID',
     // Hint: you can use '/' in slug name to create subpages
-    "about/people": "NOTION_PAGE_ID",
+    'about/people': 'NOTION_PAGE_ID',
   },
 
   // Subdomain redirects are optional
   // But it is recommended to have one for www
   subDomains: {
     www: {
-      redirect: "https://yourdomain.com",
+      redirect: 'https://yourdomain.com',
     },
   },
 
   // The 404 (not found) page is optional
   // If you don't have one, the default 404 page will be used
   fof: {
-    page: "NOTION_PAGE_ID",
-    slug: "404", // default
+    page: 'NOTION_PAGE_ID',
+    slug: '404', // default
   },
 
   // Google Font name, you can choose from https://fonts.google.com
-  googleFont: "Roboto",
+  googleFont: 'Roboto',
 
   // Custom JS for head and body of a Notion page
   customHeadJS: googleTag(GOOGLE_TAG_ID),
   customBodyJS: PAGE_SCRIPT_JS_STRING,
-};
+}
 ```
 
 <br/>
@@ -147,7 +154,7 @@ npm run deploy
 
 🎉 Enjoy your Notion website on your own domain! 🎉
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > You need to run deploy every time you update `page-script.js` or `site-config.ts`.
 
 <br/>

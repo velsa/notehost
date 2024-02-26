@@ -21,7 +21,7 @@ export async function reverseProxy(request: Request) {
   const subDomain = url.hostname.split('.')[0]
 
   if (url.hostname === domain) {
-    url.hostname = 'www.notion.so'
+    url.hostname = siteConfig.notionDomain ? `${siteConfig.notionDomain}.notion.site` : 'www.notion.so'
 
     // Handle special Notion routes
     if (url.pathname === '/robots.txt') {

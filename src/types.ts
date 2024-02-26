@@ -20,8 +20,12 @@ export interface NoteHostSiteConfigFull {
   // og:image, twitter:image
   siteImage?: string
 
-  // favicon.ico
+  // URL to custom favicon.ico
   siteIcon?: string
+
+  // Additional safety: avoid serving extraneous Notion content from your website
+  // Use the value from your Notion settings => Workspace => Settings => Domain
+  notionDomain?: string
 
   // 404 Notion page to display to visitors, the default slug is '404'
   fof?: {
