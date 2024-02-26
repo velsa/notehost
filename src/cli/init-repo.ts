@@ -39,22 +39,19 @@ export async function initRepo(domain) {
 }
 
 function buildOriginDir(appPath: string) {
-  // console.error('appPath', appPath)
-
   const runDir = path.parse(appPath).dir
+  const parts = runDir.split(path.sep)
+  const last = parts[parts.length - 1]
+  const beforeLast = parts[parts.length - 2]
 
+  // console.error('appPath', appPath)
   // console.error('runDir', runDir)
+  // console.error('parts', parts)
 
   // running locally
   if (process.env.NOTEHOST_CLI_DEBUG) {
     return path.join(runDir, '..', '..')
   }
-
-  const parts = runDir.split(path.sep)
-  const last = parts[parts.length - 1]
-  const beforeLast = parts[parts.length - 2]
-
-  console.error('parts', parts)
 
   if (last === '.bin' && beforeLast === 'node_modules') {
     // npx (installed)
