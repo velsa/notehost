@@ -1,6 +1,6 @@
 {
   "name": "notehost",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "NoteHost is a free and powerful Notion hosting service.",
   "repository": "https://github.com/velsa/notehost",
   "homepage": "https://github.com/velsa/notehost",
@@ -28,7 +28,7 @@
   "scripts": {
     "dev:cli": "npx tsx --inspect src/cli/index.ts init test.com",
     "build": "tsup src/index.ts --format cjs,esm --dts-resolve --clean --sourcemap --out-dir dist && pnpm run build:cli",
-    "build:cli": "tsup src/cli/index.ts --format cjs,esm --clean --out-dir dist/cli",
+    "build:cli": "tsup src/cli/index.ts --format esm --clean --out-dir dist/cli",
     "release": "pnpm run build && changeset publish",
     "lint": "echo Fix lint!"
   },

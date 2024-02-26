@@ -20,6 +20,9 @@ export interface NoteHostSiteConfigFull {
   // og:image, twitter:image
   siteImage?: string
 
+  // favicon.ico
+  siteIcon?: string
+
   // 404 Notion page to display to visitors, the default slug is '404'
   fof?: {
     page: string | undefined

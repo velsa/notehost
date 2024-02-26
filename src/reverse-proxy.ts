@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+import { handleFavicon } from './handlers/handle-favicon'
+import { handleNotionUrl } from './handlers/handle-other'
 import { handleApi, handleAppJs, handleJs, handleOptions, handleSitemap } from './handlers/index'
 import { siteConfig } from './reverse-proxy-init'
 import { BodyRewriter, HeadRewriter, MetaRewriter } from './rewriters/index'
@@ -9,7 +11,7 @@ export async function reverseProxy(request: Request) {
     throw new Error('Site config is not initialized. Please call initializeReverseProxy() first.')
   }
 
-  const { domain, slugToPage } = siteConfig
+  const { domain, slugToPage, siteIcon } = siteConfig
 
   if (request.method === 'OPTIONS') {
     return handleOptions(request)
@@ -42,6 +44,19 @@ export async function reverseProxy(request: Request) {
       return handleJs(url)
     }
 
+    if (url.pathname.endsWith('favicon.ico') && siteIcon) {
+      return handleFavicon(url, siteIcon)
+    }
+
+    if (
+      url.pathname.startsWith('/_assets') ||
+      url.pathname.startsWith('/image') ||
+      url.pathname.startsWith('/f/refresh') ||
+      url.pathname.match(/\.[a-zA-Z]{3}$/)
+    ) {
+      return handleNotionUrl(url)
+    }
+
     // Handle slugs, from site-config and from KV
     const slug = url.pathname.slice(1)
     const page = slugToPage[slug]
@@ -50,10 +65,12 @@ export async function reverseProxy(request: Request) {
       // console.log(`Redirecting ${slug} to https://${domain}/${page}`);
 
       return Response.redirect(`https://${domain}/${page}`, 301)
-    } else if (slug.length !== 32) {
+    } else if (slug.length !== 32 && !slug.match(/^[0-9a-f]+$/i)) {
       if (siteConfig.fof?.page?.length) {
         return Response.redirect(`https://${domain}/${siteConfig.fof.page}`, 301)
       } else {
+        console.error('!! Page Not found (404)', url.pathname)
+
         return new Response('NoteHost: Page Not found (404).', { status: 404 })
       }
     }

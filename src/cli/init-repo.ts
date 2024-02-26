@@ -39,20 +39,38 @@ export async function initRepo(domain) {
 }
 
 function buildOriginDir(appPath: string) {
-  const runDir = appPath.match(/^(.*)\/[^/]+$/)[1]
+  console.error('appPath', appPath)
+
+  const runDir = path.parse(appPath).dir
+
+  console.error('runDir', runDir)
 
   // running locally
   if (process.env.NOTEHOST_CLI_DEBUG) {
-    return path.join(runDir, '../..')
+    return path.join(runDir, '..', '..')
   }
 
-  const parts = runDir.split('/')
+  const parts = runDir.split(path.sep)
+  const last = parts[parts.length - 1]
+  const beforeLast = parts[parts.length - 2]
 
-  if (parts[parts.length - 2] === 'notehost') {
+  console.error('parts', parts)
+
+  if (last === '.bin' && beforeLast === 'node_modules') {
+    // npx (installed)
+    return path.join(runDir, '..', 'notehost')
+  }
+
+  if (last === 'cli' && beforeLast === 'dist') {
+    // npx (tmp)
+    return path.join(runDir, '..', '..')
+  }
+
+  if (beforeLast === 'notehost') {
     // pnpx
     return path.join(runDir, '..')
-  } else {
-    // npx
-    return path.join(runDir, '../notehost')
   }
+
+  // npx
+  return path.join(runDir, '..', 'notehost')
 }
