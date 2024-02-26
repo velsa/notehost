@@ -39,11 +39,11 @@ export async function initRepo(domain) {
 }
 
 function buildOriginDir(appPath: string) {
-  console.error('appPath', appPath)
+  // console.error('appPath', appPath)
 
   const runDir = path.parse(appPath).dir
 
-  console.error('runDir', runDir)
+  // console.error('runDir', runDir)
 
   // running locally
   if (process.env.NOTEHOST_CLI_DEBUG) {
