@@ -102,11 +102,11 @@ export const SITE_CONFIG: NoteHostSiteConfig = {
   siteImage: 'https://imagehosting.com/images/preview.jpg',
 
   // URL to custom favicon.ico
-  siteIcon: string,
+  siteIcon: 'https://imagehosting.com/images/favicon.ico',
 
   // Additional safety: avoid serving extraneous Notion content from your website
   // Use the value from your Notion settings => Workspace => Settings => Domain
-  notionDomain: string,
+  notionDomain: 'mydomain',
 
   // Map slugs (short page names) to Notion page IDs
   // Empty slug is your main page
