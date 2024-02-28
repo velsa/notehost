@@ -1,3 +1,4 @@
+import { HTMLRewriter } from '@worker-tools/html-rewriter'
 import { NoteHostSiteConfigFull } from '.'
 import { BodyRewriter, HeadRewriter, MetaRewriter } from './rewriters'
 
