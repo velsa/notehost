@@ -12,18 +12,13 @@ interface CopyFilesToSDKParams {
 export async function copyFilesToSDK({ parserConfig, originDir, sdkDir }: CopyFilesToSDKParams) {
   const files = fs.readdirSync(originDir)
 
-  console.log('Copying files to SDK: ', originDir, '->', sdkDir)
-  console.log('Files: ', files)
-
   fs.mkdirSync(sdkDir, { recursive: true })
 
   files.forEach((file) => {
-    const fileName = file === '_gitignore' ? '.gitignore' : file
-    const filePath = path.join(originDir, fileName)
+    const destFile = file === '_gitignore' ? '.gitignore' : file
+    const filePath = path.join(originDir, file)
 
-    console.log('copying: ', fileName)
-
-    if (fs.lstatSync(filePath).isDirectory()) {
+    if (isDirectory(filePath)) {
       copyFilesToSDK({
         parserConfig,
         originDir: path.join(originDir, file),
@@ -33,7 +28,7 @@ export async function copyFilesToSDK({ parserConfig, originDir, sdkDir }: CopyFi
       try {
         const templateFile = fs.readFileSync(filePath, 'utf8')
         const renderedFile = ejs.render(templateFile, parserConfig)
-        const sdkFilePath = path.join(sdkDir, fileName)
+        const sdkFilePath = path.join(sdkDir, destFile)
         const fileExt = path.extname(sdkFilePath)
 
         fs.writeFileSync(sdkFilePath, renderedFile, {
@@ -46,4 +41,12 @@ export async function copyFilesToSDK({ parserConfig, originDir, sdkDir }: CopyFi
       }
     }
   })
+}
+
+function isDirectory(path: string) {
+  try {
+    return fs.lstatSync(path).isDirectory()
+  } catch (e) {
+    return false
+  }
 }
