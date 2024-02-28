@@ -1,6 +1,6 @@
 {
   "name": "notehost",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "NoteHost is a free and powerful Notion hosting service.",
   "repository": "https://github.com/velsa/notehost",
   "homepage": "https://github.com/velsa/notehost",
@@ -35,11 +35,11 @@
   },
   "dependencies": {
     "@inquirer/prompts": "^3.3.2",
-    "@worker-tools/html-rewriter": "0.1.0-pre.17",
     "chalk": "^5.3.0",
     "change-case-all": "^2.1.0",
     "commander": "^11.1.0",
     "ejs": "^3.1.9",
+    "htmlrewriter": "^0.0.7",
     "is-valid-domain": "^0.1.6"
   },
   "devDependencies": {

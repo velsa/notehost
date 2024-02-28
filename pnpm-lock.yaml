@@ -4,9 +4,6 @@ dependencies:
   '@inquirer/prompts':
     specifier: ^3.3.2
     version: 3.3.2
-  '@worker-tools/html-rewriter':
-    specifier: 0.1.0-pre.17
-    version: 0.1.0-pre.17
   chalk:
     specifier: ^5.3.0
     version: 5.3.0
@@ -19,6 +16,9 @@ dependencies:
   ejs:
     specifier: ^3.1.9
     version: 3.1.9
+  htmlrewriter:
+    specifier: ^0.0.7
+    version: 0.0.7
   is-valid-domain:
     specifier: ^0.1.6
     version: 0.1.6
@@ -1147,16 +1147,6 @@ packages:
     dev: true
     optional: true
 
-  /@stardazed/streams-compression@1.0.0:
-    resolution: {integrity: sha512-SQCiwxdIVJ5xxUBYptN+fc+tJpSDbxQuJ0+3u2SmHjIzr6JIRZ28AVFtFnGy6x6j3UBlaLx73w9rC6UAFxnd1g==}
-    dependencies:
-      '@stardazed/zlib': 1.0.1
-    dev: false
-
-  /@stardazed/zlib@1.0.1:
-    resolution: {integrity: sha512-MS6PCYiRNJ32c69+3NPyL+bu7LpiFDvMcBXnlhQnF8CKMG0R/xRVCCo422NPkQ0+Cox3xKpk5Lc1LfWFS4b3cw==}
-    dev: false
-
   /@stylistic/eslint-plugin-js@1.5.4(eslint@8.56.0):
     resolution: {integrity: sha512-3ctWb3NvJNV1MsrZN91cYp2EGInLPSoZKphXIbIRx/zjZxKwLDr9z4LMOWtqjq14li/OgqUUcMq5pj8fgbLoTw==}
     engines: {node: ^16.0.0 || >=18.0.0}
@@ -1469,17 +1459,6 @@ packages:
   /@ungap/structured-clone@1.2.0:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
-
-  /@worker-tools/html-rewriter@0.1.0-pre.17:
-    resolution: {integrity: sha512-R/kjKBJtTeicFvVKdQ3J9KIirCnJcfawtaa5FG/F+ZwU6X2AmrbF+n4axxjcnxKsGjITd8OC7QhBmAkKsHJu2Q==}
-    dependencies:
-      '@stardazed/streams-compression': 1.0.0
-      '@worker-tools/resolvable-promise': 0.2.0-pre.6
-    dev: false
-
-  /@worker-tools/resolvable-promise@0.2.0-pre.6:
-    resolution: {integrity: sha512-+5RcuruCLB/P3FYYb376RgyImXaq9BBQoOskUbgPyNK3O0AXPakrXUj1EELv+lcnUSdFws/ufdrrWODLJyoTmg==}
-    dev: false
 
   /acorn-jsx@5.3.2(acorn@8.11.3):
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -2720,6 +2699,10 @@ packages:
   /hosted-git-info@2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
     dev: true
+
+  /htmlrewriter@0.0.7:
+    resolution: {integrity: sha512-OvSdqGI04ZZm+zzWv+JXRiqn61sFY3ei9sY3HjNCJL7g6LXQH23CENO68hTTxM5xan0P2ENQ8+GTRQwHbPpyvg==}
+    dev: false
 
   /human-id@1.0.2:
     resolution: {integrity: sha512-UNopramDEhHJD+VR+ehk8rOslwSfByxPIZyJRfV739NDhN5LF1fa1MqnzKm2lGTQRjNrjK19Q5fhkgIfjlVUKw==}
