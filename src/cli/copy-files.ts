@@ -12,6 +12,9 @@ interface CopyFilesToSDKParams {
 export async function copyFilesToSDK({ parserConfig, originDir, sdkDir }: CopyFilesToSDKParams) {
   const files = fs.readdirSync(originDir)
 
+  console.log('Copying files to SDK: ', originDir, '->', sdkDir)
+  console.log('Files: ', files)
+
   fs.mkdirSync(sdkDir, { recursive: true })
 
   files.forEach((file) => {
