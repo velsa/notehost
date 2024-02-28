@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { handleFavicon } from './handlers/handle-favicon'
-import { handleNotionUrl } from './handlers/handle-other'
+import { handleNotionAsset } from './handlers/handle-other'
 import { handleApi, handleAppJs, handleJs, handleOptions, handleSitemap } from './handlers/index'
 import { siteConfig } from './reverse-proxy-init'
 import { BodyRewriter, HeadRewriter, MetaRewriter } from './rewriters/index'
@@ -52,9 +52,9 @@ export async function reverseProxy(request: Request) {
       url.pathname.startsWith('/_assets') ||
       url.pathname.startsWith('/image') ||
       url.pathname.startsWith('/f/refresh') ||
-      url.pathname.match(/\.[a-zA-Z]{3}$/)
+      url.pathname.match(/\.[a-zA-Z]{2,4}$/)
     ) {
-      return handleNotionUrl(url)
+      return handleNotionAsset(url)
     }
 
     // Handle slugs, from site-config and from KV
