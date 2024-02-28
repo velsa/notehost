@@ -1,12 +1,19 @@
 /* eslint-disable no-undef */
+import { appendJavascript } from './append-js'
+import { appendJavascriptPolyfill } from './append-js-pf'
 import { handleFavicon } from './handlers/handle-favicon'
 import { handleNotionAsset } from './handlers/handle-other'
 import { handleApi, handleAppJs, handleJs, handleOptions, handleSitemap } from './handlers/index'
 import { siteConfig } from './reverse-proxy-init'
-import { BodyRewriter, HeadRewriter, MetaRewriter } from './rewriters/index'
-import { NoteHostSiteConfigFull } from './types'
 
-export async function reverseProxy(request: Request) {
+export async function reverseProxy(
+  request: Request,
+  opts: {
+    cloudflare: boolean
+  } = { cloudflare: true },
+) {
+  const { cloudflare } = opts
+
   if (!siteConfig) {
     throw new Error('Site config is not initialized. Please call initializeReverseProxy() first.')
   }
@@ -94,15 +101,5 @@ export async function reverseProxy(request: Request) {
   ret.headers.delete('Content-Security-Policy')
   ret.headers.delete('X-Content-Security-Policy')
 
-  return appendJavascript(ret, url, siteConfig)
-}
-
-async function appendJavascript(res: Response, url: URL, config: NoteHostSiteConfigFull) {
-  // eslint-disable-next-line no-undef
-  return new HTMLRewriter()
-    .on('title', new MetaRewriter(config, url))
-    .on('meta', new MetaRewriter(config, url))
-    .on('head', new HeadRewriter(config))
-    .on('body', new BodyRewriter(config))
-    .transform(res)
+  return cloudflare ? appendJavascript(ret, url, siteConfig) : appendJavascriptPolyfill(ret, url, siteConfig)
 }
