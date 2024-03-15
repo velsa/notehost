@@ -5,15 +5,14 @@
   "private": true,
   "scripts": {
     "prebuild": "./build-page-script-js-string.sh",
-    "start": "npm run prebuild && npx wrangler dev",
-    "deploy": "npm run prebuild && npx wrangler deploy",
-    "logs": "npx wrangler tail"
+    "start": "npm run prebuild && npx --yes wrangler@latest dev",
+    "deploy": "npm run prebuild && npx --yes wrangler@latest deploy",
+    "logs": "npx --yes wrangler@latest tail"
   },
   "dependencies": {
     "notehost": "^<%= notehostVersion %>"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20231218.0",
-    "wrangler": "^3.24.0"
+    "@cloudflare/workers-types": "^4.20231218.0"
   }
 }

@@ -65,14 +65,14 @@ export async function reverseProxy(
     }
 
     // Handle slugs, from site-config and from KV
-    const slug = url.pathname.slice(1)
-    const page = slugToPage[slug]
+    const slugHash = url.pathname.split('/').pop().split('-').pop()
+    const page = slugToPage[slugHash]
 
     if (page) {
       // console.log(`Redirecting ${slug} to https://${domain}/${page}`);
 
       return Response.redirect(`https://${domain}/${page}`, 301)
-    } else if (slug.length !== 32 && !slug.match(/^[0-9a-f]+$/i)) {
+    } else if (slugHash.length !== 32 && !slugHash.match(/^[0-9a-f]+$/i)) {
       if (siteConfig.fof?.page?.length) {
         return Response.redirect(`https://${domain}/${siteConfig.fof.page}`, 301)
       } else {
