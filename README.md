@@ -78,7 +78,11 @@ This will work regardless of whether you are on Windows or Mac or Linux. These s
 ```
 npm i notehost@latest
 ```
-7. Once NoteHost is installed, you will see the following files and folders inside the folder you created with `.` being the domain you provided while installing notehost.
+7. Run the following code where `<domain>` is your domain or subdomain, it will initialize NoteHost:
+```
+npx notehost init <domain>
+```
+8. Once NoteHost is installed and initialized, you will see the following files and folders inside the folder you created with `.` being the domain you provided while installing notehost.
 ```
 .
 ├── build-page-script-js-string.sh    helper script, details below
@@ -91,12 +95,12 @@ npm i notehost@latest
     ├── page-script.js                your custom JS page script
     └── site-config.ts                your domain and website config
 ```
-8. Go inside the `.` directory and run:
+9. Go inside the `.` directory and run:
 ```
 npm i
 ```
 That will make sure to install everything you need for your website.
-9. Once you do that, open File Explorer on Windows or Finder on Mac (not sure what it is called on Linux) and navigate to this `.` folder. Inside there open the `src` folder and open `site-config.ts` inside an editor like NotePad, Sublime, Visual Studio Code, or similar. It will look like the following. Just update anything that references your website and then save and close it.
+10. Once you do that, open File Explorer on Windows or Finder on Mac (not sure what it is called on Linux) and navigate to this `.` folder. Inside there open the `src` folder and open `site-config.ts` inside an editor like NotePad, Sublime, Visual Studio Code, or similar. It will look like the following. Just update anything that references your website and then save and close it.
 ```
 import { NoteHostSiteConfig, googleTag } from 'notehost'
 import { PAGE_SCRIPT_JS_STRING } from './_page-script-js-string'
@@ -155,11 +159,7 @@ export const SITE_CONFIG: NoteHostSiteConfig = {
 ```
 The `NOTION_PAGE_ID` comes from the URL you get from the Share Menu inside of Notion. Paste that URL into your browser and it is the long set of numbers and letters at the end of your domain.
 
-10. Now you will want to open the `wrangler.toml` file (inside the `.` folder) and make sure the `name` field matches the CloudFlare worker you created previously matches. If it doesn't, update it inside this file to match. Then save and close the file.
-11. Run the following code where `<domain>` is your domain or subdomain:
-```
-npx notehost init <domain>
-```
+11. Now you will want to open the `wrangler.toml` file (inside the `.` folder) and make sure the `name` field matches the CloudFlare worker you created previously matches. If it doesn't, update it inside this file to match. Then save and close the file.
 12. Run the following code in Powershell on Windows or Terminal on Mac or Linux to install wrangler, which is used to publish changes to your CloudFlare worker:
 ```
 npm i wrangler@latest
