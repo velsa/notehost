@@ -203,4 +203,4 @@ https://www.velsa.net
 
 Based on [Fruition](https://fruitionsite.com), which is no longer maintained 😕
 
-Lots of thanks to [@DudeThatsErin](https://github.com/DudeThatsErin) and his [code snippet](https://github.com/stephenou/fruitionsite/issues/258#issue-1929516345).
+Lots of thanks to [@DudeThatsErin](https://github.com/DudeThatsErin) and her [code snippet](https://github.com/stephenou/fruitionsite/issues/258#issue-1929516345).
