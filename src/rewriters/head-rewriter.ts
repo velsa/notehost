@@ -9,7 +9,7 @@ export class HeadRewriter {
   }
 
   element(element: Element) {
-    const { googleFont, customHeadJS } = this.siteConfig
+    const { googleFont, customHeadJS, customHeadCSS } = this.siteConfig
 
     if (googleFont) {
       element.append(
@@ -37,7 +37,9 @@ export class HeadRewriter {
         div.notion-topbar-mobile > div:nth-child(4) { display: none !important; }
         div.notion-topbar-mobile > div:nth-child(7) { display: none !important; }
         div.notion-topbar-mobile > div:nth-child(1n).toggle-mode { display: block !important; }
-        </style>${customHeadJS ?? ''}`,
+        ${customHeadCSS ?? ''}
+        </style>
+        ${customHeadJS ?? ''}`,
       {
         html: true,
       },

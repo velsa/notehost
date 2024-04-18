@@ -49,6 +49,7 @@ export const SITE_CONFIG: NoteHostSiteConfig = {
   googleFont: 'Roboto',
 
   // Custom JS for head and body of a Notion page
+  customHeadCSS: ``,
   customHeadJS: googleTag(GOOGLE_TAG_ID),
   customBodyJS: PAGE_SCRIPT_JS_STRING,
 }

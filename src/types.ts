@@ -38,7 +38,8 @@ export interface NoteHostSiteConfigFull {
   // Google Font name, you can choose from https://fonts.google.com
   googleFont?: string
 
-  // Custom JS to be injected in <head> and <body>
+  // Custom CSS/JS to be injected in <head> and <body>
+  customHeadCSS?: string
   customHeadJS?: string
   customBodyJS?: string
 

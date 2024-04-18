@@ -136,7 +136,11 @@ export const SITE_CONFIG: NoteHostSiteConfig = {
   // Google Font name, you can choose from https://fonts.google.com
   googleFont: 'Roboto',
 
-  // Custom JS for head and body of a Notion page
+  // Custom CSS/JS for head and body of a Notion page
+  customHeadCSS: `
+  .notion-topbar {
+    background: lightblue
+  }`,
   customHeadJS: googleTag(GOOGLE_TAG_ID),
   customBodyJS: PAGE_SCRIPT_JS_STRING,
 }
