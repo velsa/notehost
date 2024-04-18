@@ -3,7 +3,7 @@ export const PAGE_SCRIPT_JS_STRING = `<script>
 /* eslint-disable no-return-assign */
 /* eslint-disable no-param-reassign */
 
-// Description: This script is injected into the Notion page and runs on every page load.
+// This script is injected into the Notion page and runs on every page load.
 window.onload = function () {
   setInterval(() => {
     // Remove all Notion tooltips on images
@@ -17,6 +17,6 @@ window.onload = function () {
     if (propertiesDropdown) {
       propertiesDropdown.style.display = 'none'
     }
-  })
+  }, 1000)
 }
 </script>`
