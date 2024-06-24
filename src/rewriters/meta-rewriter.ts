@@ -15,7 +15,7 @@ export class MetaRewriter {
   }
 
   element(element: Element) {
-    const { siteName, siteDescription, siteImage, domain } = this.siteConfig
+    const { siteName, siteDescription, twitterHandle, siteImage, domain } = this.siteConfig
     const property = element.getAttribute('property') ?? ''
     const name = element.getAttribute('name') ?? ''
     let content = element.getAttribute('content') ?? ''
@@ -34,6 +34,7 @@ export class MetaRewriter {
       element.setAttribute('content', content)
     }
 
+
     if (property === 'og:site_name' || name === 'article:author') {
       element.setAttribute('content', siteName)
     }
@@ -51,6 +52,10 @@ export class MetaRewriter {
 
     if (property === 'og:url' || name === 'twitter:url') {
       element.setAttribute('content', domain)
+    }
+
+    if (name === 'twitter:site') {
+      element.setAttribute('content', twitterHandle ?? '@NotionHQ')
     }
 
     if (siteImage) {

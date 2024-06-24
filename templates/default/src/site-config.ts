@@ -13,6 +13,9 @@ export const SITE_CONFIG: NoteHostSiteConfig = {
   siteDescription: '<%= siteDescription %>',
   siteImage: '<%= siteImage %>',
 
+  // Twitter handle, optional
+  // twitterHandle: '',
+  
   // URL to custom favicon.ico
   // siteIcon: '',
 

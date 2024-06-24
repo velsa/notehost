@@ -104,6 +104,9 @@ export const SITE_CONFIG: NoteHostSiteConfig = {
   // URL to custom favicon.ico
   siteIcon: 'https://imagehosting.com/images/favicon.ico',
 
+  // Social media links, optional
+  twitterHandle: '@mytwitter',
+
   // Additional safety: avoid serving extraneous Notion content from your website
   // Use the value from your Notion settings => Workspace => Settings => Domain
   notionDomain: 'mydomain',
