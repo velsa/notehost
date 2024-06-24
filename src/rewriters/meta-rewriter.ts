@@ -50,7 +50,13 @@ export class MetaRewriter {
     }
 
     if (property === 'og:url' || name === 'twitter:url') {
-      element.setAttribute('content', 'https://' + domain + this.url.pathname)
+      if (this.isRootPage) {
+        element.setAttribute('content', `https://${domain}/`)
+      } else if (pageToSlug[page]) {
+        element.setAttribute('content', `https://${domain}/${pageToSlug[page]}`)
+      } else {
+        element.setAttribute('content', `https://${domain}/${page}`)
+      }
     }
 
     if (name === 'twitter:site') {
