@@ -15,23 +15,29 @@ export class MetaRewriter {
   }
 
   element(element: Element) {
-    const { siteName, siteDescription, twitterHandle, siteImage, domain } = this.siteConfig
+    const { siteName, siteDescription, twitterHandle, siteImage, domain, pageToSlug } = this.siteConfig
+    const page = this.url.pathname.slice(-32)
     const property = element.getAttribute('property') ?? ''
     const name = element.getAttribute('name') ?? ''
-    let content = element.getAttribute('content') ?? ''
 
-    content = content.replace(' | Built with Notion', '')
-    content = content.replace(' | Notion', '')
     // console.log(
     //   `${this.url}: <${element.tagName} name="${name}" property="${property}">${content}</${element.tagName}>`,
     // )
 
     if (element.tagName === 'title') {
-      element.setInnerContent(content)
+      if (pageToSlug[page]) {
+        element.setInnerContent(`${siteName} | ${pageToSlug[page]}`)
+      } else {
+        element.setInnerContent(siteName)
+      }
     }
 
     if (property === 'og:title' || name === 'twitter:title') {
-      element.setAttribute('content', content)
+      if (pageToSlug[page]) {
+        element.setAttribute('content', `${siteName} | ${pageToSlug[page]}`)
+      } else {
+        element.setAttribute('content', siteName)
+      }
     }
 
 
@@ -40,14 +46,7 @@ export class MetaRewriter {
     }
 
     if (name === 'description' || property === 'og:description' || name === 'twitter:description') {
-      if (this.isRootPage) {
-        element.setAttribute('content', siteDescription)
-      } else {
-        element.setAttribute(
-          'content',
-          content.replace('Built with Notion, the all-in-one connected workspace with publishing capabilities.', ''),
-        )
-      }
+      element.setAttribute('content', siteDescription)
     }
 
     if (property === 'og:url' || name === 'twitter:url') {
@@ -55,15 +54,13 @@ export class MetaRewriter {
     }
 
     if (name === 'twitter:site') {
-      element.setAttribute('content', twitterHandle ?? '@NotionHQ')
+      element.setAttribute('content', twitterHandle ?? '')
     }
 
     if (siteImage) {
       if (property === 'og:image' || name === 'twitter:image') {
-        if (this.isRootPage) {
-          // console.log(`----- Image for url '${this.url.pathname}'`)
-          element.setAttribute('content', siteImage)
-        }
+        // console.log(`----- Image for url '${this.url.pathname}'`)
+        element.setAttribute('content', siteImage)
       }
     }
 
