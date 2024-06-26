@@ -10,6 +10,8 @@ export function initializeReverseProxy(siteConfigUser: NoteHostSiteConfig) {
     pageToSlug: {},
   }
 
+  siteConfig.pageMetadata = siteConfig.pageMetadata || {}
+
   siteConfig.fof = {
     page: siteConfig.fof?.page,
     slug: siteConfig.fof?.slug || '404',

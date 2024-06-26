@@ -15,7 +15,7 @@ export class MetaRewriter {
   }
 
   element(element: Element) {
-    const { siteName, siteDescription, twitterHandle, siteImage, domain, pageToSlug } = this.siteConfig
+    const { siteName, siteDescription, twitterHandle, siteImage, domain, pageToSlug, pageMetadata } = this.siteConfig
     const page = this.url.pathname.slice(-32)
     const property = element.getAttribute('property') ?? ''
     const name = element.getAttribute('name') ?? ''
@@ -25,19 +25,13 @@ export class MetaRewriter {
     // )
 
     if (element.tagName === 'title') {
-      if (pageToSlug[page]) {
-        element.setInnerContent(`${siteName} | ${pageToSlug[page]}`)
-      } else {
-        element.setInnerContent(siteName)
-      }
+      const pageTitle = pageMetadata[page]?.title ?? siteName
+      element.setInnerContent(pageTitle)
     }
 
     if (property === 'og:title' || name === 'twitter:title') {
-      if (pageToSlug[page]) {
-        element.setAttribute('content', `${siteName} | ${pageToSlug[page]}`)
-      } else {
-        element.setAttribute('content', siteName)
-      }
+      const pageTitle = pageMetadata[page]?.title ?? siteName
+      element.setAttribute('content', pageTitle)
     }
 
 
@@ -46,7 +40,8 @@ export class MetaRewriter {
     }
 
     if (name === 'description' || property === 'og:description' || name === 'twitter:description') {
-      element.setAttribute('content', siteDescription)
+      const pageDescription = pageMetadata[page]?.description ?? siteDescription
+      element.setAttribute('content', pageDescription)
     }
 
     if (property === 'og:url' || name === 'twitter:url') {
@@ -60,13 +55,20 @@ export class MetaRewriter {
     }
 
     if (name === 'twitter:site') {
-      element.setAttribute('content', twitterHandle ?? '')
+      if (twitterHandle) {
+        element.setAttribute('content', `${twitterHandle}`)
+      } else {
+        element.remove()
+      }
     }
 
-    if (siteImage) {
-      if (property === 'og:image' || name === 'twitter:image') {
-        // console.log(`----- Image for url '${this.url.pathname}'`)
-        element.setAttribute('content', siteImage)
+    if (property === 'og:image' || name === 'twitter:image') {
+      const pageImage = pageMetadata[page]?.image ?? siteImage
+      if (pageImage) {
+        // console.log(`----- Image for url '${this.url.pathname}: ${pageImage}'`)
+        element.setAttribute('content', pageImage)
+      } else {
+        element.remove()
       }
     }
 

@@ -121,6 +121,16 @@ export const SITE_CONFIG: NoteHostSiteConfig = {
     'about/people': 'NOTION_PAGE_ID',
   },
 
+  // Rewrite meta tags for specific pages
+  // Use the Notion page ID as the key
+  pageMetadata: {
+    'NOTION_PAGE_ID': {
+      title: 'My Custom Page Title',
+      description: 'My custom page description',
+      image: 'https://imagehosting.com/images/page_preview.jpg',
+    },
+  },
+
   // Subdomain redirects are optional
   // But it is recommended to have one for www
   subDomains: {
