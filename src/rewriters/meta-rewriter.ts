@@ -34,7 +34,6 @@ export class MetaRewriter {
       element.setAttribute('content', pageTitle)
     }
 
-
     if (property === 'og:site_name' || name === 'article:author') {
       element.setAttribute('content', siteName)
     }

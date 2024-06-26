@@ -75,9 +75,9 @@ export interface NoteHostNotionSlugConfig {
 // Overrides site-level metadata
 export interface NoteHostSiteConfigPageMetadata {
   // <title>, og:title and twitter:title
-  title: string
+  title?: string
   // description, og:description and twitter:description
-  description: string
+  description?: string
   // og:image and twitter:image
   image?: string
 }
