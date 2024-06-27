@@ -19,28 +19,38 @@ export class MetaRewriter {
     const page = this.url.pathname.slice(-32)
     const property = element.getAttribute('property') ?? ''
     const name = element.getAttribute('name') ?? ''
+    const content = element.getAttribute('content') ?? ''
 
     // console.log(
     //   `${this.url}: <${element.tagName} name="${name}" property="${property}">${content}</${element.tagName}>`,
     // )
 
     if (element.tagName === 'title') {
-      const pageTitle = pageMetadata[page]?.title ?? siteName
+      const pageTitle = pageMetadata[page]?.title ?? content.replace(' | Notion', '')
       element.setInnerContent(pageTitle)
     }
 
     if (property === 'og:title' || name === 'twitter:title') {
-      const pageTitle = pageMetadata[page]?.title ?? siteName
+      const pageTitle = pageMetadata[page]?.title ?? content.replace(' | Notion', '')
       element.setAttribute('content', pageTitle)
     }
 
-    if (property === 'og:site_name' || name === 'article:author') {
+    if (property === 'og:site_name') {
       element.setAttribute('content', siteName)
     }
 
+    if (name === 'article:author') {
+      const pageAuthor = pageMetadata[page]?.author ?? content
+      element.setAttribute('content', pageAuthor)
+    }
+
     if (name === 'description' || property === 'og:description' || name === 'twitter:description') {
-      const pageDescription = pageMetadata[page]?.description ?? siteDescription
-      element.setAttribute('content', pageDescription)
+      if (this.isRootPage) {
+        element.setAttribute('content', siteDescription)
+      } else {
+        const pageDescription = pageMetadata[page]?.description ?? content
+        element.setAttribute('content', pageDescription)
+      }
     }
 
     if (property === 'og:url' || name === 'twitter:url') {
@@ -62,12 +72,13 @@ export class MetaRewriter {
     }
 
     if (property === 'og:image' || name === 'twitter:image') {
-      const pageImage = pageMetadata[page]?.image ?? siteImage
-      if (pageImage) {
+      if (this.isRootPage && siteImage) {
+        // console.log(`----- Image for url '${this.url.pathname}: ${siteImage}'`)
+        element.setAttribute('content', siteImage)
+      } else {
+        const pageImage = pageMetadata[page]?.image ?? content
         // console.log(`----- Image for url '${this.url.pathname}: ${pageImage}'`)
         element.setAttribute('content', pageImage)
-      } else {
-        element.remove()
       }
     }
 

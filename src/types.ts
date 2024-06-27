@@ -80,4 +80,6 @@ export interface NoteHostSiteConfigPageMetadata {
   description?: string
   // og:image and twitter:image
   image?: string
+  // article:author
+  author?: string
 }

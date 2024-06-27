@@ -128,6 +128,7 @@ export const SITE_CONFIG: NoteHostSiteConfig = {
       title: 'My Custom Page Title',
       description: 'My custom page description',
       image: 'https://imagehosting.com/images/page_preview.jpg',
+      author: 'My Name',
     },
   },
 
