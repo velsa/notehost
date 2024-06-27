@@ -104,6 +104,9 @@ export const SITE_CONFIG: NoteHostSiteConfig = {
   // URL to custom favicon.ico
   siteIcon: 'https://imagehosting.com/images/favicon.ico',
 
+  // Social media links, optional
+  twitterHandle: '@mytwitter',
+
   // Additional safety: avoid serving extraneous Notion content from your website
   // Use the value from your Notion settings => Workspace => Settings => Domain
   notionDomain: 'mydomain',
@@ -116,6 +119,17 @@ export const SITE_CONFIG: NoteHostSiteConfig = {
     contact: 'NOTION_PAGE_ID',
     // Hint: you can use '/' in slug name to create subpages
     'about/people': 'NOTION_PAGE_ID',
+  },
+
+  // Rewrite meta tags for specific pages
+  // Use the Notion page ID as the key
+  pageMetadata: {
+    'NOTION_PAGE_ID': {
+      title: 'My Custom Page Title',
+      description: 'My custom page description',
+      image: 'https://imagehosting.com/images/page_preview.jpg',
+      author: 'My Name',
+    },
   },
 
   // Subdomain redirects are optional

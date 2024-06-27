@@ -11,12 +11,15 @@ export interface NoteHostSiteConfigFull {
   // Mapping from slug to page ID
   slugToPage: Record<string, string>
   notionSlugToPage?: NoteHostNotionSlugConfig
+  pageMetadata?: Record<string, NoteHostSiteConfigPageMetadata>
 
   // SEO metadata
-  // og:site_name, article:author
+  // title, og:site_name, article:author
   siteName: string
-  // og:description, twitter:description
+  // description, og:description, twitter:description
   siteDescription: string
+  // twitter:site, twitter:creator
+  twitterHandle?: string
   // og:image, twitter:image
   siteImage?: string
 
@@ -66,4 +69,17 @@ export interface NoteHostNotionSlugConfig {
 
   // TODO: sync this DB to firebase via notesync
   // and save values to slugs KV on webhook from notesync
+}
+
+// Page SEO metadata
+// Overrides site-level metadata
+export interface NoteHostSiteConfigPageMetadata {
+  // <title>, og:title and twitter:title
+  title?: string
+  // description, og:description and twitter:description
+  description?: string
+  // og:image and twitter:image
+  image?: string
+  // article:author
+  author?: string
 }
