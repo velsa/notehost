@@ -26,12 +26,14 @@ export class MetaRewriter {
     // )
 
     if (element.tagName === 'title') {
-      const pageTitle = pageMetadata[page]?.title ?? content.replace(' | Notion', '')
+      const pageTitle = pageMetadata[page]?.title ?? removeNotionAds(content)
+
       element.setInnerContent(pageTitle)
     }
 
     if (property === 'og:title' || name === 'twitter:title') {
-      const pageTitle = pageMetadata[page]?.title ?? content.replace(' | Notion', '')
+      const pageTitle = pageMetadata[page]?.title ?? removeNotionAds(content)
+
       element.setAttribute('content', pageTitle)
     }
 
@@ -41,6 +43,7 @@ export class MetaRewriter {
 
     if (name === 'article:author') {
       const pageAuthor = pageMetadata[page]?.author ?? content
+
       element.setAttribute('content', pageAuthor)
     }
 
@@ -48,7 +51,8 @@ export class MetaRewriter {
       if (this.isRootPage) {
         element.setAttribute('content', siteDescription)
       } else {
-        const pageDescription = pageMetadata[page]?.description ?? content
+        const pageDescription = pageMetadata[page]?.description ?? removeNotionAds(content)
+
         element.setAttribute('content', pageDescription)
       }
     }
@@ -78,6 +82,7 @@ export class MetaRewriter {
       } else {
         const pageImage = pageMetadata[page]?.image ?? content
         // console.log(`----- Image for url '${this.url.pathname}: ${pageImage}'`)
+
         element.setAttribute('content', pageImage)
       }
     }
@@ -86,4 +91,11 @@ export class MetaRewriter {
       element.remove()
     }
   }
+}
+
+function removeNotionAds(text: string) {
+  return text
+    .replace(' | Built with Notion', '')
+    .replace(' | Notion', '')
+    .replace('Built with Notion, the all-in-one connected workspace with publishing capabilities.', '')
 }
