@@ -15,50 +15,70 @@ export class MetaRewriter {
   }
 
   element(element: Element) {
-    const { siteName, siteDescription, siteImage, domain } = this.siteConfig
+    const { siteName, siteDescription, twitterHandle, siteImage, domain, pageToSlug, pageMetadata } = this.siteConfig
+    const page = this.url.pathname.slice(-32)
     const property = element.getAttribute('property') ?? ''
     const name = element.getAttribute('name') ?? ''
-    let content = element.getAttribute('content') ?? ''
+    const content = element.getAttribute('content') ?? ''
 
-    content = content.replace(' | Built with Notion', '')
-    content = content.replace(' | Notion', '')
     // console.log(
     //   `${this.url}: <${element.tagName} name="${name}" property="${property}">${content}</${element.tagName}>`,
     // )
 
     if (element.tagName === 'title') {
-      element.setInnerContent(content)
+      const pageTitle = pageMetadata[page]?.title ?? content.replace(' | Notion', '')
+      element.setInnerContent(pageTitle)
     }
 
     if (property === 'og:title' || name === 'twitter:title') {
-      element.setAttribute('content', content)
+      const pageTitle = pageMetadata[page]?.title ?? content.replace(' | Notion', '')
+      element.setAttribute('content', pageTitle)
     }
 
-    if (property === 'og:site_name' || name === 'article:author') {
+    if (property === 'og:site_name') {
       element.setAttribute('content', siteName)
+    }
+
+    if (name === 'article:author') {
+      const pageAuthor = pageMetadata[page]?.author ?? content
+      element.setAttribute('content', pageAuthor)
     }
 
     if (name === 'description' || property === 'og:description' || name === 'twitter:description') {
       if (this.isRootPage) {
         element.setAttribute('content', siteDescription)
       } else {
-        element.setAttribute(
-          'content',
-          content.replace('Built with Notion, the all-in-one connected workspace with publishing capabilities.', ''),
-        )
+        const pageDescription = pageMetadata[page]?.description ?? content
+        element.setAttribute('content', pageDescription)
       }
     }
 
     if (property === 'og:url' || name === 'twitter:url') {
-      element.setAttribute('content', domain)
+      if (this.isRootPage) {
+        element.setAttribute('content', `https://${domain}/`)
+      } else if (pageToSlug[page]) {
+        element.setAttribute('content', `https://${domain}/${pageToSlug[page]}`)
+      } else {
+        element.setAttribute('content', `https://${domain}/${page}`)
+      }
     }
 
-    if (siteImage) {
-      if (property === 'og:image' || name === 'twitter:image') {
-        if (this.isRootPage) {
-          // console.log(`----- Image for url '${this.url.pathname}'`)
-          element.setAttribute('content', siteImage)
-        }
+    if (name === 'twitter:site') {
+      if (twitterHandle) {
+        element.setAttribute('content', `${twitterHandle}`)
+      } else {
+        element.remove()
+      }
+    }
+
+    if (property === 'og:image' || name === 'twitter:image') {
+      if (this.isRootPage && siteImage) {
+        // console.log(`----- Image for url '${this.url.pathname}: ${siteImage}'`)
+        element.setAttribute('content', siteImage)
+      } else {
+        const pageImage = pageMetadata[page]?.image ?? content
+        // console.log(`----- Image for url '${this.url.pathname}: ${pageImage}'`)
+        element.setAttribute('content', pageImage)
       }
     }
 
