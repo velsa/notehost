@@ -136,9 +136,24 @@ observer.observe(document.querySelector('#notion-app'), {
 const { replaceState } = window.history
 
 window.history.replaceState = function () {
+  if (arguments[1] === 'bypass') {
+    return
+  }
+
   // console.log('replaceState arguments:', arguments)
   // console.log('replaceState state:', state)
-  if (arguments[1] !== 'bypass' && slugs.includes(getSlug())) return
+  const slug = getSlug()
+  const isKnownSlug = slugs.includes(slug)
+
+  if (isKnownSlug && location.pathname !== ['/', slug].join('')) {
+    const page = SLUG_TO_PAGE[slug]
+
+    if (page) {
+      // console.log('slug:', slug)
+      // console.log('redirecting to:', page)
+      arguments[2] = ['/', page].join('')
+    }
+  }
 
   replaceState.apply(window.history, arguments)
 }
