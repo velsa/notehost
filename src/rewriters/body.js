@@ -104,8 +104,9 @@ const observer = new MutationObserver(() => {
 
   if ((nav && nav.firstChild && nav.firstChild.firstChild) || (mobileNav && mobileNav.firstChild)) {
     // console.log('redirected', getSlug())
-    redirected = true
     updateSlug()
+    redirected = true
+
     addDarkModeButton(nav ? 'web' : 'mobile')
 
     const { onpopstate } = window
@@ -133,25 +134,44 @@ observer.observe(document.querySelector('#notion-app'), {
   subtree: true,
 })
 
-const { replaceState } = window.history
+const { replaceState, back, forward } = window.history
+
+window.history.back = function () {
+  back.apply(window.history, arguments)
+}
+
+window.history.forward = function () {
+  forward.apply(window.history, arguments)
+}
 
 window.history.replaceState = function () {
   if (arguments[1] === 'bypass') {
     return
   }
 
-  // console.log('replaceState arguments:', arguments)
-  // console.log('replaceState state:', state)
   const slug = getSlug()
   const isKnownSlug = slugs.includes(slug)
 
-  if (isKnownSlug && location.pathname !== ['/', slug].join('')) {
+  console.log('replaceState:', { slug, isKnownSlug, arguments })
+
+  // console.log('replaceState arguments:', arguments)
+  // console.log('replaceState state:', state)
+
+  if (arguments[2] === '/login') {
     const page = SLUG_TO_PAGE[slug]
 
     if (page) {
       // console.log('slug:', slug)
       // console.log('redirecting to:', page)
       arguments[2] = ['/', page].join('')
+      replaceState.apply(window.history, arguments)
+      window.location.reload()
+
+      return
+    }
+  } else {
+    if (isKnownSlug && arguments[2] !== ['/', slug].join('')) {
+      return
     }
   }
 

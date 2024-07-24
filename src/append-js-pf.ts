@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HTMLRewriter } from 'htmlrewriter'
 import { NoteHostSiteConfigFull } from '.'
 import { BodyRewriter, HeadRewriter, MetaRewriter } from './rewriters'
