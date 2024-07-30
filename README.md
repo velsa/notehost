@@ -45,7 +45,6 @@ From a high-level, this package works by using Cloudflare workers to redirect tr
 Go into the working directory from which you'd like to keep the script to apply the Cloudflare worker configuration and run:
 
 ```sh
-npm install notehost
 npx notehost init <domain>
 ```
 

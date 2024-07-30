@@ -40,7 +40,8 @@
     "commander": "^11.1.0",
     "ejs": "^3.1.9",
     "htmlrewriter": "^0.0.7",
-    "is-valid-domain": "^0.1.6"
+    "is-valid-domain": "^0.1.6",
+    "notehost": "^1.0.33"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
