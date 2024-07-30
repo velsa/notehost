@@ -19,6 +19,7 @@
 <br/>
 
 ## How to use:
+From a high-level, this package works by using Cloudflare workers to redirect traffic from your domain to your relevant Notion page. As such, the steps you will need to take are (1) set up your Cloudflare account and (2) apply configurations to your worker, which is done via CLI with the packaged script.
 
 ### Setup your Cloudflare account
 
@@ -41,7 +42,7 @@
 
 ---
 
-Go into your working directory and run:
+Go into the working directory from which you'd like to keep the script to apply the Cloudflare worker configuration and run:
 
 ```sh
 npx notehost init <domain>
