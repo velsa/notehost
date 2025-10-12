@@ -23,7 +23,8 @@
   "module": "dist/index.cjs",
   "types": "dist/index.d.ts",
   "bin": {
-    "init": "./dist/cli/index.js"
+    "init": "./dist/cli/index.js",
+    "notehost": "./dist/cli/index.js"
   },
   "scripts": {
     "prebuild": "./build-body-js-string.sh",
